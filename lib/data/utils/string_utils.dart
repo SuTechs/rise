@@ -87,6 +87,10 @@ class StringUtils {
     return DateFormat('MMMM yyyy').format(date);
   }
 
+  static getWeekDay(DateTime date) {
+    return DateFormat('EE').format(date);
+  }
+
   static int random(int min, int max) {
     return min + Random().nextInt(max - min);
   }

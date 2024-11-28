@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rise/screens/habits/habits_screen.dart';
-import 'package:rise/screens/pomodoro/pomodoro_screen.dart';
-import 'package:rise/screens/settings/settings_screen.dart';
+import 'package:rise/widgets/save_page_state.dart';
+
+import 'habits/habits_screen.dart';
+import 'pomodoro/pomodoro_screen.dart';
+import 'settings/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,9 +14,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   static const pages = [
-    HabitsScreen(),
-    PomodoroScreen(),
-    SettingsScreen(),
+    SavePageSate(child: HabitsScreen()),
+    SavePageSate(child: PomodoroScreen()),
+    SavePageSate(child: SettingsScreen()),
   ];
 
   final _pageController = PageController();
@@ -74,19 +76,22 @@ class _BottomNavigationBarState extends State<_BottomNavigationBar> {
         items: const [
           /// Habits
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Habits',
           ),
 
           /// Pomodoro
           BottomNavigationBarItem(
-            icon: Icon(Icons.timer),
+            icon: Icon(Icons.timer_outlined),
+            activeIcon: Icon(Icons.timer),
             label: 'Pomodoro',
           ),
 
           /// Settings
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.settings_outlined),
+            activeIcon: Icon(Icons.settings),
             label: 'Settings',
           ),
         ],

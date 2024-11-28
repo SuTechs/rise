@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../home.dart';
@@ -27,8 +28,8 @@ class GetStartedScreen extends StatelessWidget {
           /// buttons
           GetStartedButton(
             onTap: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()));
+              Navigator.push(context,
+                  CupertinoPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
         ],
