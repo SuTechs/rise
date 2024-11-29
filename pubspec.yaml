@@ -49,6 +49,7 @@ dependencies:
 
   # UI
   dynamic_color: ^1.7.0
+  google_fonts: ^6.2.1
 
   # Utils
   timeago: ^3.7.0

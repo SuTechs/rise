@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'constants.dart';
 
@@ -39,21 +40,23 @@ class AppTheme {
     //     colorScheme.primary.withOpacity(0.08), colorScheme.surface);
 
     return theme.copyWith(
-        // scaffoldBackgroundColor: backgroundColor,
-        // appBarTheme: AppBarTheme(
-        //   centerTitle: true,
-        //   backgroundColor: backgroundColor,
-        //   // foregroundColor: colorScheme.primary,
-        //   iconTheme: theme.iconTheme.copyWith(opacity: 0.75),
-        //   // titleTextStyle: TextStyle(color: colorScheme.onBackground),
-        //   elevation: 0.0,
-        // ),
-        //
-        // /// color scheme override
-        // colorScheme: colorScheme.copyWith(
-        //   surface: backgroundColor,
-        // ),
-        );
+      // scaffoldBackgroundColor: backgroundColor,
+      // appBarTheme: AppBarTheme(
+      //   centerTitle: true,
+      //   backgroundColor: backgroundColor,
+      //   // foregroundColor: colorScheme.primary,
+      //   iconTheme: theme.iconTheme.copyWith(opacity: 0.75),
+      //   // titleTextStyle: TextStyle(color: colorScheme.onBackground),
+      //   elevation: 0.0,
+      // ),
+      //
+      // /// color scheme override
+      // colorScheme: colorScheme.copyWith(
+      //   surface: backgroundColor,
+      // ),
+
+      textTheme: GoogleFonts.poppinsTextTheme(theme.textTheme),
+    );
   }
 }
 
