@@ -55,15 +55,35 @@ class HabitsScreen extends StatelessWidget {
                   icon: Icons.local_cafe,
                   title: 'No Coffee',
                 ),
+                SizedBox(height: 200),
               ],
             ),
 
             /// Grid View
-            ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return const HabitGridviewCard();
-              },
+            ListView(
+              children: const [
+                HabitGridviewCard(
+                  color: Colors.purple,
+                  icon: Icons.directions_run,
+                  title: 'Running for 2 kms',
+                ),
+                HabitGridviewCard(
+                  color: Colors.brown,
+                  icon: Icons.self_improvement,
+                  title: 'Meditation',
+                ),
+                HabitGridviewCard(
+                  color: Colors.green,
+                  icon: Icons.local_drink,
+                  title: 'Drink 2 litres of water',
+                ),
+                HabitGridviewCard(
+                  color: Colors.blue,
+                  icon: Icons.local_cafe,
+                  title: 'No Coffee',
+                ),
+                SizedBox(height: 200),
+              ],
             ),
           ],
         ),
