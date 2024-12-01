@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:rise/screens/habits/components/date_record_listenable.dart';
@@ -71,36 +73,39 @@ class HabitGridviewCard extends StatelessWidget {
             margin: const EdgeInsets.only(top: 4.0, bottom: 12.0),
             width: double.infinity,
             height: 100,
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 7,
-                crossAxisSpacing: 4,
-                mainAxisSpacing: 4,
-              ),
-              reverse: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 30,
-              itemBuilder: (_, index) {
-                final date = _today.subtract(Duration(days: index));
+            child: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationX(math.pi),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 7,
+                  crossAxisSpacing: 4,
+                  mainAxisSpacing: 4,
+                ),
+                reverse: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (_, index) {
+                  final date = _today.subtract(Duration(days: index));
 
-                return DateRecordListenable(
-                  date: date,
-                  habitId: data.id,
-                  dateBuilder: (isCompleted) {
-                    /// yearly heat map tile
-                    return Container(
-                      height: 4,
-                      width: 4,
-                      decoration: BoxDecoration(
-                        color: isCompleted
-                            ? cardColor.withAlpha(160)
-                            : cardColor.withAlpha(32),
-                        borderRadius: BorderRadius.circular(2.0),
-                      ),
-                    );
-                  },
-                );
-              },
+                  return DateRecordListenable(
+                    date: date,
+                    habitId: data.id,
+                    dateBuilder: (isCompleted) {
+                      /// yearly heat map tile
+                      return Container(
+                        height: 4,
+                        width: 4,
+                        decoration: BoxDecoration(
+                          color: isCompleted
+                              ? cardColor.withAlpha(160)
+                              : cardColor.withAlpha(32),
+                          borderRadius: BorderRadius.circular(2.0),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],
