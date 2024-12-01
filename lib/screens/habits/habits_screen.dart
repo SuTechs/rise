@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'add_habit_screen.dart';
 import 'components/habit_gridview_card.dart';
 import 'components/habit_listview_card.dart';
 
@@ -91,7 +92,14 @@ class HabitsScreen extends StatelessWidget {
         /// Add New Habit Button
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // Navigator.pushNamed(context, '/add-habit');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const AddHabitScreen();
+                },
+              ),
+            );
           },
           child: const Icon(Icons.add),
         ),

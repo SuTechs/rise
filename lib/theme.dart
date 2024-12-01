@@ -55,7 +55,7 @@ class AppTheme {
       //   surface: backgroundColor,
       // ),
 
-      textTheme: GoogleFonts.poppinsTextTheme(theme.textTheme),
+      textTheme: GoogleFonts.interTextTheme(theme.textTheme),
     );
   }
 }
