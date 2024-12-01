@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:rise/data/data/habit/habit.dart';
 
 import 'hive_native.dart';
 
@@ -31,4 +32,8 @@ abstract class HiveService {
   Box<String> get stringBox;
 
   Box<bool> get boolBox;
+
+  Box<HabitData> get habitBox;
+
+  Box<HabitRecordData> get habitRecordBox;
 }

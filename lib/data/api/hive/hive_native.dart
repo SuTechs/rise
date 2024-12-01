@@ -1,4 +1,5 @@
 import 'package:hive_flutter/adapters.dart';
+import 'package:rise/data/data/habit/habit.dart';
 
 import '../../data/user/user.dart';
 import 'hive_service.dart';
@@ -19,6 +20,8 @@ class NativeHiveService extends HiveService {
   /// register adapters for all custom data types and hive objets
   static Future<void> _registerAdapters() async {
     Hive.registerAdapter(UserDataAdapter());
+    Hive.registerAdapter(HabitDataAdapter());
+    Hive.registerAdapter(HabitRecordDataAdapter());
 
     // add more adapters here
   }
@@ -29,6 +32,8 @@ class NativeHiveService extends HiveService {
     await Hive.openBox<bool>("bool");
 
     await Hive.openBox<UserData>('UserData');
+    await Hive.openBox<HabitData>('HabitData');
+    await Hive.openBox<HabitRecordData>('HabitRecordData');
 
     // add more boxes here
   }
@@ -44,6 +49,8 @@ class NativeHiveService extends HiveService {
   void reset() {
     // clear user data
     box<UserData>().clear();
+    box<HabitData>().clear();
+    box<HabitRecordData>().clear();
 
     box<bool>().clear();
     stringBox.clear();
@@ -54,4 +61,12 @@ class NativeHiveService extends HiveService {
 
   @override
   Box<bool> get boolBox => box<bool>();
+
+  // Habit Box
+  @override
+  Box<HabitData> get habitBox => box<HabitData>();
+
+  // Habit Record Box
+  @override
+  Box<HabitRecordData> get habitRecordBox => box<HabitRecordData>();
 }

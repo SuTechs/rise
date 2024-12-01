@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rise/theme.dart';
 
+import '../../data/data/habit/habit_category.dart';
 import '../onboarding/components/components.dart';
 
 class AddHabitScreen extends StatefulWidget {
@@ -142,12 +143,10 @@ class SelectHabitCategory extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(width: context.width * 0.2),
-                for (int i = 0; i < 10; i++)
-                  const HabitCategoryCard(
-                    title: 'Health',
-                    icon: Icons.directions_run,
-                    color: Colors.orange,
-                  ),
+
+                // Habit List
+                for (final category in HabitCategory.categories)
+                  HabitCategoryCard(category: category),
               ],
             ),
           ),
@@ -159,26 +158,22 @@ class SelectHabitCategory extends StatelessWidget {
 
 /// Habit Category Card
 class HabitCategoryCard extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final Color color;
+  final HabitCategory category;
 
   const HabitCategoryCard({
     super.key,
-    required this.title,
-    required this.icon,
-    required this.color,
+    required this.category,
   });
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.colorScheme;
 
-    final cardColor = color.harmonizeWith(colorScheme.surface);
+    final cardColor = category.color.harmonizeWith(colorScheme.surface);
 
     return Container(
-      height: 100,
-      width: 100,
+      height: 88,
+      width: 88,
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: cardColor.withAlpha(80),
@@ -188,13 +183,13 @@ class HabitCategoryCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            icon,
+            category.icon,
             size: 30,
             color: cardColor,
           ),
           const SizedBox(height: 8),
           Text(
-            title,
+            category.name,
             style: TextStyle(
               color: cardColor,
               fontSize: 14,

@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 
+// Keeping it for later  use,  when we have signups and cloud storage
 /// Data class representing user information.
 @freezed
 class UserData with _$UserData {
