@@ -30,7 +30,8 @@ mixin _$HabitData {
 
   /// Habit category  id
   @HiveField(2)
-  String get categoryId => throw _privateConstructorUsedError; // Timestamps
+  HabitCategory get category =>
+      throw _privateConstructorUsedError; // Timestamps
   /// Habit creation timestamp
   @HiveField(5)
   int get createdAt => throw _privateConstructorUsedError;
@@ -57,7 +58,7 @@ abstract class $HabitDataCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String name,
-      @HiveField(2) String categoryId,
+      @HiveField(2) HabitCategory category,
       @HiveField(5) int createdAt,
       @HiveField(6) int updatedAt});
 }
@@ -79,7 +80,7 @@ class _$HabitDataCopyWithImpl<$Res, $Val extends HabitData>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? categoryId = null,
+    Object? category = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -92,10 +93,10 @@ class _$HabitDataCopyWithImpl<$Res, $Val extends HabitData>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as HabitCategory,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -119,7 +120,7 @@ abstract class _$$HabitDataImplCopyWith<$Res>
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String name,
-      @HiveField(2) String categoryId,
+      @HiveField(2) HabitCategory category,
       @HiveField(5) int createdAt,
       @HiveField(6) int updatedAt});
 }
@@ -139,7 +140,7 @@ class __$$HabitDataImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? categoryId = null,
+    Object? category = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -152,10 +153,10 @@ class __$$HabitDataImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as HabitCategory,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -175,7 +176,7 @@ class _$HabitDataImpl extends _HabitData {
   const _$HabitDataImpl(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.name,
-      @HiveField(2) required this.categoryId,
+      @HiveField(2) required this.category,
       @HiveField(5) required this.createdAt,
       @HiveField(6) required this.updatedAt})
       : super._();
@@ -196,7 +197,7 @@ class _$HabitDataImpl extends _HabitData {
   /// Habit category  id
   @override
   @HiveField(2)
-  final String categoryId;
+  final HabitCategory category;
 // Timestamps
   /// Habit creation timestamp
   @override
@@ -210,7 +211,7 @@ class _$HabitDataImpl extends _HabitData {
 
   @override
   String toString() {
-    return 'HabitData(id: $id, name: $name, categoryId: $categoryId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'HabitData(id: $id, name: $name, category: $category, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -220,8 +221,8 @@ class _$HabitDataImpl extends _HabitData {
             other is _$HabitDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -231,7 +232,7 @@ class _$HabitDataImpl extends _HabitData {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, categoryId, createdAt, updatedAt);
+      Object.hash(runtimeType, id, name, category, createdAt, updatedAt);
 
   /// Create a copy of HabitData
   /// with the given fields replaced by the non-null parameter values.
@@ -253,7 +254,7 @@ abstract class _HabitData extends HabitData {
   const factory _HabitData(
       {@HiveField(0) required final String id,
       @HiveField(1) required final String name,
-      @HiveField(2) required final String categoryId,
+      @HiveField(2) required final HabitCategory category,
       @HiveField(5) required final int createdAt,
       @HiveField(6) required final int updatedAt}) = _$HabitDataImpl;
   const _HabitData._() : super._();
@@ -274,7 +275,7 @@ abstract class _HabitData extends HabitData {
   /// Habit category  id
   @override
   @HiveField(2)
-  String get categoryId; // Timestamps
+  HabitCategory get category; // Timestamps
   /// Habit creation timestamp
   @override
   @HiveField(5)

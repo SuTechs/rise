@@ -1,9 +1,10 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rise/data/command/habit/habits_command.dart';
 import 'package:rise/theme.dart';
 
-import '../../data/data/habit/habit_category.dart';
+import '../../data/data/habit/habit.dart';
 import '../onboarding/components/components.dart';
 
 class AddHabitScreen extends StatefulWidget {
@@ -145,8 +146,20 @@ class SelectHabitCategory extends StatelessWidget {
                 SizedBox(width: context.width * 0.2),
 
                 // Habit List
-                for (final category in HabitCategory.categories)
-                  HabitCategoryCard(category: category),
+                for (final category in HabitCategory.values)
+                  HabitCategoryCard(
+                    category: category,
+                    onTap: () {
+                      // add habit in hive
+                      HabitsCommand().addHabit(
+                        name: habitName,
+                        category: category,
+                      );
+
+                      // pop all screens
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                    },
+                  ),
               ],
             ),
           ),
@@ -159,10 +172,12 @@ class SelectHabitCategory extends StatelessWidget {
 /// Habit Category Card
 class HabitCategoryCard extends StatelessWidget {
   final HabitCategory category;
+  final void Function() onTap;
 
   const HabitCategoryCard({
     super.key,
     required this.category,
+    required this.onTap,
   });
 
   @override
@@ -171,32 +186,35 @@ class HabitCategoryCard extends StatelessWidget {
 
     final cardColor = category.color.harmonizeWith(colorScheme.surface);
 
-    return Container(
-      height: 88,
-      width: 88,
-      margin: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: cardColor.withAlpha(80),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            category.icon,
-            size: 30,
-            color: cardColor,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            category.name,
-            style: TextStyle(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 88,
+        width: 88,
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: cardColor.withAlpha(80),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              category.icon,
+              size: 30,
               color: cardColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              category.name,
+              style: TextStyle(
+                color: cardColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -22,6 +22,7 @@ class NativeHiveService extends HiveService {
     Hive.registerAdapter(UserDataAdapter());
     Hive.registerAdapter(HabitDataAdapter());
     Hive.registerAdapter(HabitRecordDataAdapter());
+    Hive.registerAdapter(HabitCategoryAdapter());
 
     // add more adapters here
   }

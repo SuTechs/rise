@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -18,7 +19,7 @@ class HabitData with _$HabitData {
     @HiveField(1) required String name,
 
     /// Habit category  id
-    @HiveField(2) required String categoryId,
+    @HiveField(2) required HabitCategory category,
 
     // Timestamps
     /// Habit creation timestamp
@@ -60,4 +61,38 @@ class HabitRecordData with _$HabitRecordData {
 
     return onlyData.millisecondsSinceEpoch;
   }
+}
+
+/// Habit Category
+@HiveType(typeId: 3)
+enum HabitCategory {
+  @HiveField(0)
+  sports(Icons.sports_soccer, Colors.green),
+  @HiveField(1)
+  health(Icons.local_hospital, Colors.red),
+  @HiveField(2)
+  work(Icons.work, Colors.blue),
+  @HiveField(3)
+  study(Icons.book, Colors.purple),
+  @HiveField(4)
+  food(Icons.fastfood, Colors.orange),
+  @HiveField(5)
+  finance(Icons.monetization_on, Colors.yellow),
+  @HiveField(6)
+  yoga(Icons.self_improvement, Colors.pink),
+  @HiveField(7)
+  social(Icons.people, Colors.teal),
+  @HiveField(8)
+  fun(Icons.emoji_emotions, Colors.deepPurple),
+  @HiveField(9)
+  outdoors(Icons.nature_people, Colors.green),
+  @HiveField(10)
+  reading(Icons.menu_book, Colors.blue),
+  @HiveField(11)
+  others(Icons.grid_view_rounded, Colors.grey);
+
+  final IconData icon;
+  final Color color;
+
+  const HabitCategory(this.icon, this.color);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rise/data/command/habit/habits_command.dart';
 
 import 'add_habit_screen.dart';
 import 'components/habit_gridview_card.dart';
@@ -31,61 +32,13 @@ class HabitsScreen extends StatelessWidget {
         ),
 
         /// Habit List View
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             /// Week View
-            ListView(
-              children: const [
-                HabitListViewCard(
-                  color: Colors.purple,
-                  icon: Icons.directions_run,
-                  title: 'Running for 2 kms',
-                ),
-                HabitListViewCard(
-                  color: Colors.brown,
-                  icon: Icons.self_improvement,
-                  title: 'Meditation',
-                ),
-                HabitListViewCard(
-                  color: Colors.green,
-                  icon: Icons.local_drink,
-                  title: 'Drink 2 litres of water',
-                ),
-                HabitListViewCard(
-                  color: Colors.blue,
-                  icon: Icons.local_cafe,
-                  title: 'No Coffee',
-                ),
-                SizedBox(height: 200),
-              ],
-            ),
+            HabitList(),
 
             /// Grid View
-            ListView(
-              children: const [
-                HabitGridviewCard(
-                  color: Colors.purple,
-                  icon: Icons.directions_run,
-                  title: 'Running for 2 kms',
-                ),
-                HabitGridviewCard(
-                  color: Colors.brown,
-                  icon: Icons.self_improvement,
-                  title: 'Meditation',
-                ),
-                HabitGridviewCard(
-                  color: Colors.green,
-                  icon: Icons.local_drink,
-                  title: 'Drink 2 litres of water',
-                ),
-                HabitGridviewCard(
-                  color: Colors.blue,
-                  icon: Icons.local_cafe,
-                  title: 'No Coffee',
-                ),
-                SizedBox(height: 200),
-              ],
-            ),
+            HabitList(isGridView: true),
           ],
         ),
 
@@ -104,6 +57,47 @@ class HabitsScreen extends StatelessWidget {
           child: const Icon(Icons.add),
         ),
       ),
+    );
+  }
+}
+
+/// Habit List
+class HabitList extends StatelessWidget {
+  final bool isGridView;
+
+  const HabitList({
+    super.key,
+    this.isGridView = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: HabitsCommand().habitDataListenable,
+      builder: (context, box, child) {
+        return ListView.builder(
+          itemCount: box.length,
+          itemBuilder: (context, index) {
+            final habit = box.values.elementAt(index);
+
+            final habitName = habit.name;
+            final habitIcon = habit.category.icon;
+            final habitColor = habit.category.color;
+
+            return isGridView
+                ? HabitGridviewCard(
+                    color: habitColor,
+                    icon: habitIcon,
+                    title: habitName,
+                  )
+                : HabitListViewCard(
+                    color: habitColor,
+                    icon: habitIcon,
+                    title: habitName,
+                  );
+          },
+        );
+      },
     );
   }
 }
