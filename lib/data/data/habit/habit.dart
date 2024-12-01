@@ -54,12 +54,12 @@ class HabitRecordData with _$HabitRecordData {
       _$HabitRecordDataFromJson(json);
 
   /// Record ID - For a given date, there will be only one record
-  int get id {
+  String get id {
     final dateTime = DateTime.fromMillisecondsSinceEpoch(date);
 
     final onlyData = DateTime(dateTime.year, dateTime.month, dateTime.day);
 
-    return onlyData.millisecondsSinceEpoch;
+    return "${habitId}_${onlyData.millisecondsSinceEpoch}";
   }
 }
 

@@ -80,21 +80,9 @@ class HabitList extends StatelessWidget {
           itemBuilder: (context, index) {
             final habit = box.values.elementAt(index);
 
-            final habitName = habit.name;
-            final habitIcon = habit.category.icon;
-            final habitColor = habit.category.color;
-
             return isGridView
-                ? HabitGridviewCard(
-                    color: habitColor,
-                    icon: habitIcon,
-                    title: habitName,
-                  )
-                : HabitListViewCard(
-                    color: habitColor,
-                    icon: habitIcon,
-                    title: habitName,
-                  );
+                ? HabitGridviewCard(data: habit)
+                : HabitListViewCard(data: habit);
           },
         );
       },

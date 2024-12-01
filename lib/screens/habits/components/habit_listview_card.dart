@@ -1,20 +1,18 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:rise/data/data/habit/habit.dart';
 import 'package:rise/theme.dart';
 
 import '../../../data/utils/string_utils.dart';
+import 'date_record_listenable.dart';
 
 /// habit list card
 class HabitListViewCard extends StatelessWidget {
-  final Color color;
-  final IconData icon;
-  final String title;
+  final HabitData data;
 
   const HabitListViewCard({
     super.key,
-    required this.color,
-    required this.icon,
-    required this.title,
+    required this.data,
   });
 
   static final _today = DateTime.now();
@@ -22,9 +20,8 @@ class HabitListViewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.colorScheme;
-    final textTheme = context.textTheme;
 
-    final cardColor = color.harmonizeWith(colorScheme.primary);
+    final cardColor = data.category.color.harmonizeWith(colorScheme.primary);
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -47,12 +44,12 @@ class HabitListViewCard extends StatelessWidget {
             /// Habit Icon
             leading: CircleAvatar(
               radius: 24,
-              backgroundColor: color.withAlpha(100),
-              child: Icon(icon),
+              backgroundColor: data.category.color.withAlpha(100),
+              child: Icon(data.category.icon),
             ),
 
             /// Habit Title
-            title: Text(title),
+            title: Text(data.name),
 
             /// Habit more options
             trailing: CircleAvatar(
@@ -77,44 +74,12 @@ class HabitListViewCard extends StatelessWidget {
               itemBuilder: (_, index) {
                 final date = _today.subtract(Duration(days: index));
 
-                final isCompleted = StringUtils.random(0, 2) == 1;
-
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      /// Day of the week
-                      Text(
-                        StringUtils.getWeekDay(date),
-                        style: textTheme.labelSmall?.copyWith(
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-
-                      /// Date - Border Container
-                      Container(
-                        margin: const EdgeInsets.only(top: 7.0),
-                        padding: const EdgeInsets.all(7.0),
-                        decoration: BoxDecoration(
-                          color: isCompleted
-                              ? color.withAlpha(80)
-                              : colorScheme.surface.withAlpha(80),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: isCompleted
-                                ? color
-                                : colorScheme.onSurface.withAlpha(80),
-                          ),
-                        ),
-                        child: Text(
-                          date.day.toString(),
-                          style: textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: DateTile(
+                    color: data.category.color,
+                    date: date,
+                    habitId: data.id,
                   ),
                 );
               },
@@ -122,6 +87,70 @@ class HabitListViewCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Date Tile
+class DateTile extends StatelessWidget {
+  final Color color;
+  final DateTime date;
+  final String habitId;
+
+  const DateTile({
+    super.key,
+    required this.color,
+    required this.date,
+    required this.habitId,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = context.colorScheme;
+    final textTheme = context.textTheme;
+
+    return DateRecordListenable(
+      date: date,
+      habitId: habitId,
+      dateBuilder: (isCompleted) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            /// Day of the week
+            Text(
+              StringUtils.getWeekDay(date),
+              style: textTheme.labelSmall?.copyWith(
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+
+            /// Date - Border Container
+            Container(
+              height: 28,
+              width: 28,
+              margin: const EdgeInsets.only(top: 7.0),
+              decoration: BoxDecoration(
+                color: isCompleted
+                    ? color.withAlpha(80)
+                    : colorScheme.surface.withAlpha(80),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color:
+                      isCompleted ? color : colorScheme.onSurface.withAlpha(80),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  date.day.toString(),
+                  style: textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

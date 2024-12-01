@@ -12,6 +12,21 @@ class HabitsCommand extends BaseAppCommand {
   ValueListenable<Box<HabitData>> get habitDataListenable =>
       hive.habitBox.listenable();
 
+  ///  Habit Record Listenable
+  ///  Temp solution for, optimise this  logic  to listening to habit specific records
+  ValueListenable<Box<HabitRecordData>> habitRecordDataListenable(
+    String habitId,
+    DateTime dateTime,
+  ) {
+    final recordId = HabitRecordData(
+      habitId: habitId,
+      date: dateTime.millisecondsSinceEpoch,
+      createdAt: TimeUtils.nowMillis,
+    ).id;
+
+    return hive.habitRecordBox.listenable(keys: [recordId]);
+  }
+
   /// Add / Update habit
   void addHabit({
     String? id,
@@ -27,5 +42,38 @@ class HabitsCommand extends BaseAppCommand {
     );
 
     hive.addHabit(habitData);
+  }
+
+  /// check if the habit is complete on the given date
+  bool isHabitComplete(String habitId, DateTime date) {
+    final habitRecord = HabitRecordData(
+      habitId: habitId,
+      date: date.millisecondsSinceEpoch,
+      createdAt: TimeUtils.nowMillis,
+    );
+
+    return hive.habitRecordBox.containsKey(habitRecord.id);
+  }
+
+  /// Add  Habit Record
+  void addHabitRecord(String habitId, DateTime date) {
+    final habitRecord = HabitRecordData(
+      habitId: habitId,
+      date: date.millisecondsSinceEpoch,
+      createdAt: TimeUtils.nowMillis,
+    );
+
+    hive.addHabitRecord(habitRecord);
+  }
+
+  /// Delete Habit Record
+  void deleteHabitRecord(String habitId, DateTime date) {
+    final habitRecord = HabitRecordData(
+      habitId: habitId,
+      date: date.millisecondsSinceEpoch,
+      createdAt: TimeUtils.nowMillis,
+    );
+
+    hive.deleteHabitRecord(habitRecord.id);
   }
 }

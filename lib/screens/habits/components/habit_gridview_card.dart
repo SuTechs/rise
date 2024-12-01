@@ -1,21 +1,15 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:rise/screens/habits/components/date_record_listenable.dart';
 import 'package:rise/theme.dart';
 
-import '../../../data/utils/string_utils.dart';
+import '../../../data/data/habit/habit.dart';
 
 /// habit list card
 class HabitGridviewCard extends StatelessWidget {
-  final Color color;
-  final IconData icon;
-  final String title;
+  final HabitData data;
 
-  const HabitGridviewCard({
-    super.key,
-    required this.color,
-    required this.icon,
-    required this.title,
-  });
+  const HabitGridviewCard({super.key, required this.data});
 
   static final _today = DateTime.now();
 
@@ -23,8 +17,7 @@ class HabitGridviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = context.colorScheme;
 
-    final cardColor = color.harmonizeWith(colorScheme.primary);
-    final isCompleted = StringUtils.random(0, 2) == 1;
+    final cardColor = data.category.color.harmonizeWith(colorScheme.primary);
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -42,27 +35,34 @@ class HabitGridviewCard extends StatelessWidget {
             contentPadding: EdgeInsets.zero,
 
             /// Habit Icon
-            leading: Icon(icon, color: color),
+            leading: Icon(data.category.icon, color: data.category.color),
 
             /// Habit Title
-            title: Text(title),
+            title: Text(data.name),
 
             /// Habit more options
-            trailing: Container(
-              width: 24,
-              height: 24,
-              decoration: BoxDecoration(
-                color: isCompleted
-                    ? cardColor.withAlpha(80)
-                    : colorScheme.surface.withAlpha(80),
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: isCompleted
-                      ? cardColor
-                      : colorScheme.onSurface.withAlpha(80),
-                ),
-              ),
-              child: const Icon(Icons.done, size: 16),
+
+            trailing: DateRecordListenable(
+              date: _today,
+              habitId: data.id,
+              dateBuilder: (isCompleted) {
+                return Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: isCompleted
+                        ? cardColor.withAlpha(80)
+                        : colorScheme.surface.withAlpha(80),
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: isCompleted
+                          ? cardColor
+                          : colorScheme.onSurface.withAlpha(80),
+                    ),
+                  ),
+                  child: const Icon(Icons.done, size: 16),
+                );
+              },
             ),
           ),
 
@@ -79,21 +79,26 @@ class HabitGridviewCard extends StatelessWidget {
               ),
               reverse: true,
               scrollDirection: Axis.horizontal,
+              itemCount: 30,
               itemBuilder: (_, index) {
                 final date = _today.subtract(Duration(days: index));
 
-                final isCompleted = StringUtils.random(0, 2) == 1;
-
-                /// yearly heat map tile
-                return Container(
-                  height: 4,
-                  width: 4,
-                  decoration: BoxDecoration(
-                    color: isCompleted
-                        ? cardColor.withAlpha(160)
-                        : cardColor.withAlpha(32),
-                    borderRadius: BorderRadius.circular(2.0),
-                  ),
+                return DateRecordListenable(
+                  date: date,
+                  habitId: data.id,
+                  dateBuilder: (isCompleted) {
+                    /// yearly heat map tile
+                    return Container(
+                      height: 4,
+                      width: 4,
+                      decoration: BoxDecoration(
+                        color: isCompleted
+                            ? cardColor.withAlpha(160)
+                            : cardColor.withAlpha(32),
+                        borderRadius: BorderRadius.circular(2.0),
+                      ),
+                    );
+                  },
                 );
               },
             ),
