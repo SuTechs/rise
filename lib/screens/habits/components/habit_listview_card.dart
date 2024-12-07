@@ -29,12 +29,15 @@ class HabitListViewCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            cardColor.withAlpha(80),
-            // cardColor.withOpacity(0.4),
-            cardColor.withAlpha(16),
+            cardColor.withAlpha(55),
+            cardColor.withAlpha(25),
+            cardColor.withAlpha(8),
+            cardColor.withAlpha(0),
           ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(16.0),
       ),
       child: Column(
         children: [

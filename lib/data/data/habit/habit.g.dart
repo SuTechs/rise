@@ -36,6 +36,8 @@ class HabitCategoryAdapter extends TypeAdapter<HabitCategory> {
       case 10:
         return HabitCategory.reading;
       case 11:
+        return HabitCategory.fitness;
+      case 12:
         return HabitCategory.others;
       default:
         return HabitCategory.sports;
@@ -78,8 +80,11 @@ class HabitCategoryAdapter extends TypeAdapter<HabitCategory> {
       case HabitCategory.reading:
         writer.writeByte(10);
         break;
-      case HabitCategory.others:
+      case HabitCategory.fitness:
         writer.writeByte(11);
+        break;
+      case HabitCategory.others:
+        writer.writeByte(12);
         break;
     }
   }
@@ -205,6 +210,7 @@ Map<String, dynamic> _$$HabitDataImplToJson(_$HabitDataImpl instance) =>
 
 const _$HabitCategoryEnumMap = {
   HabitCategory.sports: 'sports',
+  HabitCategory.fitness: 'fitness',
   HabitCategory.health: 'health',
   HabitCategory.work: 'work',
   HabitCategory.study: 'study',
@@ -216,6 +222,7 @@ const _$HabitCategoryEnumMap = {
   HabitCategory.outdoors: 'outdoors',
   HabitCategory.reading: 'reading',
   HabitCategory.others: 'others',
+
 };
 
 _$HabitRecordDataImpl _$$HabitRecordDataImplFromJson(

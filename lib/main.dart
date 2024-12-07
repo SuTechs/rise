@@ -37,8 +37,7 @@ class MyApp extends StatelessWidget {
           // navigatorObservers: [],
           debugShowCheckedModeBanner: false,
           title: 'Rise',
-          theme: AppTheme.lightTheme(lightColorScheme),
-          darkTheme: AppTheme.darkTheme(darkColorScheme),
+          theme: AppTheme.darkTheme(darkColorScheme),
           home: const _AppBootstrapper(),
         );
       },

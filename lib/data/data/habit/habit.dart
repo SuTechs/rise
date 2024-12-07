@@ -67,28 +67,30 @@ class HabitRecordData with _$HabitRecordData {
 @HiveType(typeId: 3)
 enum HabitCategory {
   @HiveField(0)
-  sports(Icons.sports_soccer, Colors.green),
+  sports(Icons.sports_basketball, Colors.orange),
   @HiveField(1)
-  health(Icons.local_hospital, Colors.red),
+  health(Icons.monitor_heart, Color(0xffADE25D)),
   @HiveField(2)
   work(Icons.work, Colors.blue),
   @HiveField(3)
-  study(Icons.book, Colors.purple),
+  study(Icons.book, Color(0xffFBBFCA)),
   @HiveField(4)
-  food(Icons.fastfood, Colors.orange),
+  food(Icons.restaurant, Colors.green),
   @HiveField(5)
   finance(Icons.monetization_on, Colors.yellow),
   @HiveField(6)
-  yoga(Icons.self_improvement, Colors.pink),
+  yoga(Icons.self_improvement, Color(0xffD664BE)),
   @HiveField(7)
-  social(Icons.people, Colors.teal),
+  social(Icons.people, Color(0xffF6BE9A)),
   @HiveField(8)
-  fun(Icons.emoji_emotions, Colors.deepPurple),
+  fun(Icons.headphones, Color(0xff7CC6FE)),
   @HiveField(9)
-  outdoors(Icons.nature_people, Colors.green),
+  outdoors(Icons.sports_tennis, Color(0xff8789C0)),
   @HiveField(10)
   reading(Icons.menu_book, Colors.blue),
   @HiveField(11)
+  fitness(Icons.fitness_center, Colors.indigoAccent),
+  @HiveField(12)
   others(Icons.grid_view_rounded, Colors.grey);
 
   final IconData icon;

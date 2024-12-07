@@ -6,15 +6,15 @@ import 'constants.dart';
 class AppTheme {
   static Color get seedColor => kPurpleSeedColor;
 
-  static ThemeData lightTheme(ColorScheme? lightColorScheme) {
-    return _getFinalTheme(
-      ThemeData(
-        // fontFamily: 'DIN',
-        colorScheme:
-            lightColorScheme ?? ColorScheme.fromSeed(seedColor: seedColor),
-      ),
-    );
-  }
+  // static ThemeData lightTheme(ColorScheme? lightColorScheme) {
+  //   return _getFinalTheme(
+  //     ThemeData(
+  //       // fontFamily: 'DIN',
+  //       colorScheme:
+  //           lightColorScheme ?? ColorScheme.fromSeed(seedColor: seedColor),
+  //     ),
+  //   );
+  // }
 
   static ThemeData darkTheme(ColorScheme? darkColorScheme) {
     return _getFinalTheme(

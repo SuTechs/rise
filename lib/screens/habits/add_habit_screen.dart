@@ -189,9 +189,9 @@ class HabitCategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 88,
-        width: 88,
-        margin: const EdgeInsets.all(8),
+        height: 80,
+        width: 100,
+        margin: const EdgeInsets.only(left: 4,right: 4),
         decoration: BoxDecoration(
           color: cardColor.withAlpha(80),
           borderRadius: BorderRadius.circular(12),
