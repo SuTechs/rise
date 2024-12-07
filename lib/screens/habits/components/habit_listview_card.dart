@@ -56,6 +56,7 @@ class HabitListViewCard extends StatelessWidget {
               data.name,
               style: context.textTheme.titleLarge?.copyWith(
                 fontFamily: "Merriweather",
+                fontSize: 20.0
               ),
             ),
 

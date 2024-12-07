@@ -106,27 +106,34 @@ class _HabitsScreenState extends State<HabitsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ToggleButtons(
+        title: Text(
+          "Streak Habit",
+          style: context.textTheme.titleLarge?.copyWith(
+            color: Colors.orangeAccent,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: ToggleButtons(
+              // color: Colors.grey,
+              // fillColor: Colors.grey,
+              // borderColor: Colors.grey,
+              // selectedColor: Colors.black,
+              // selectedBorderColor: Colors.grey,
               isSelected: [_selectedIndex == 0, _selectedIndex == 1],
               onPressed: _onTogglePressed,
-              constraints: const BoxConstraints(minHeight: 36, minWidth: 100),
+              constraints: const BoxConstraints(minHeight: 26, minWidth: 64),
               borderRadius: BorderRadius.circular(8),
+              borderWidth: 0.5,
               children: const [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text('Week View'),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text('Grid View'),
-                ),
+                Icon(Icons.calendar_view_day),
+                Icon(Icons.calendar_view_month),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       body: PageView(
         controller: _pageController,
@@ -172,7 +179,7 @@ class HabitList extends StatelessWidget {
       builder: (context, box, child) {
         if (box.length == 0) {
           return GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
