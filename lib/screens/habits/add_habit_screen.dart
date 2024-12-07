@@ -6,6 +6,7 @@ import 'package:rise/theme.dart';
 
 import '../../data/data/habit/habit.dart';
 import '../onboarding/components/components.dart';
+import 'dart:math';
 
 class AddHabitScreen extends StatefulWidget {
   const AddHabitScreen({super.key});
@@ -17,6 +18,16 @@ class AddHabitScreen extends StatefulWidget {
 class _AddHabitScreenState extends State<AddHabitScreen> {
   final _habitNameController = TextEditingController();
 
+  String getRandomImg() {
+    const images = [
+      // "assets/yoga_women1.png",
+      "assets/yoga_women2.png",
+      "assets/yoga_women3.png",
+    ];
+    final random = Random();
+    return images[random.nextInt(images.length)];
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = context.height;
@@ -27,14 +38,13 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back_ios),
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        // ),
-        title: const Text('Add Habit'),
-      ),
+          // leading: IconButton(
+          //   icon: const Icon(Icons.arrow_back_ios),
+          //   onPressed: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
+          ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.2),
         child: Column(
@@ -44,10 +54,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
             /// Title
             Text(
               'Put a name for \nyour Habit',
-              style: textTheme.titleMedium?.copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-              ),
+              style: textTheme.titleMedium
+                  ?.copyWith(fontSize: 20, fontFamily: "Merriweather"),
               textAlign: TextAlign.start,
             ),
             const SizedBox(height: 16),
@@ -59,7 +67,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
               keyboardType: TextInputType.text,
               textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration(
-                hintText: 'eg: Go to Gym',
+                hintText: 'eg: Gym',
                 hintStyle: TextStyle(color: colorScheme.outline),
                 filled: true,
                 fillColor: colorScheme.onInverseSurface,
@@ -78,8 +86,8 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
 
             /// Bottom Section: Illustration
             Image.asset(
-              'assets/yoga_person.png',
-              height: 150,
+              getRandomImg(),
+              height: 200,
             ),
             SizedBox(height: height * 0.1),
           ],
@@ -131,10 +139,8 @@ class SelectHabitCategory extends StatelessWidget {
           Text(
             'Select a category for\nyour habit',
             textAlign: TextAlign.center,
-            style: context.textTheme.titleMedium?.copyWith(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
+            style: context.textTheme.titleMedium
+                ?.copyWith(fontSize: 20, fontFamily: "Merriweather"),
           ),
           const SizedBox(height: 16),
 
@@ -191,7 +197,7 @@ class HabitCategoryCard extends StatelessWidget {
       child: Container(
         height: 80,
         width: 100,
-        margin: const EdgeInsets.only(left: 4,right: 4),
+        margin: const EdgeInsets.only(left: 4, right: 4),
         decoration: BoxDecoration(
           color: cardColor.withAlpha(80),
           borderRadius: BorderRadius.circular(12),

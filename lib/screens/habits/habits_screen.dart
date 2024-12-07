@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rise/data/command/habit/habits_command.dart';
+import 'package:rise/theme.dart';
 
 import 'add_habit_screen.dart';
 import 'components/habit_gridview_card.dart';
@@ -61,7 +62,6 @@ import 'components/habit_listview_card.dart';
 //   }
 // }
 
-
 class HabitsScreen extends StatefulWidget {
   const HabitsScreen({super.key});
 
@@ -71,6 +71,36 @@ class HabitsScreen extends StatefulWidget {
 
 class _HabitsScreenState extends State<HabitsScreen> {
   int _selectedIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _selectedIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  void _onTogglePressed(int index) {
+    setState(() {
+      _selectedIndex = index;
+      _pageController.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +111,7 @@ class _HabitsScreenState extends State<HabitsScreen> {
           children: [
             ToggleButtons(
               isSelected: [_selectedIndex == 0, _selectedIndex == 1],
-              onPressed: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
+              onPressed: _onTogglePressed,
               constraints: const BoxConstraints(minHeight: 36, minWidth: 100),
               borderRadius: BorderRadius.circular(8),
               children: const [
@@ -102,8 +128,9 @@ class _HabitsScreenState extends State<HabitsScreen> {
           ],
         ),
       ),
-      body: IndexedStack(
-        index: _selectedIndex,
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: _onPageChanged,
         children: const [
           /// Week View
           HabitList(),
@@ -129,7 +156,6 @@ class _HabitsScreenState extends State<HabitsScreen> {
   }
 }
 
-
 /// Habit List
 class HabitList extends StatelessWidget {
   final bool isGridView;
@@ -144,6 +170,35 @@ class HabitList extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: HabitsCommand().habitDataListenable,
       builder: (context, box, child) {
+        if (box.length == 0) {
+          return GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const AddHabitScreen();
+                  },
+                ),
+              );
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/yoga_women2.png",
+                  width: 240,
+                  height: 240,
+                  fit: BoxFit.cover,
+                ),
+                Text(
+                  "+ Create a habit",
+                  style: context.textTheme.headlineSmall,
+                ),
+              ],
+            ),
+          );
+        }
         return ListView.builder(
           itemCount: box.length,
           itemBuilder: (context, index) {

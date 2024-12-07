@@ -19,12 +19,11 @@ class AppTheme {
   static ThemeData darkTheme(ColorScheme? darkColorScheme) {
     return _getFinalTheme(
       ThemeData(
-        // fontFamily: 'DIN',
-        colorScheme: darkColorScheme ??
-            ColorScheme.fromSeed(
-              seedColor: seedColor,
-              brightness: Brightness.dark,
-            ),
+        fontFamily: 'Urbanist',
+        colorScheme:ColorScheme.fromSeed(
+          seedColor: seedColor,
+          brightness: Brightness.dark,
+        )
       ),
     );
   }

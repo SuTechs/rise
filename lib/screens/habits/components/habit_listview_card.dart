@@ -52,7 +52,12 @@ class HabitListViewCard extends StatelessWidget {
             ),
 
             /// Habit Title
-            title: Text(data.name),
+            title: Text(
+              data.name,
+              style: context.textTheme.titleLarge?.copyWith(
+                fontFamily: "Merriweather",
+              ),
+            ),
 
             /// Habit more options
             trailing: CircleAvatar(
@@ -120,10 +125,13 @@ class DateTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             /// Day of the week
-            Text(
-              StringUtils.getWeekDay(date),
-              style: textTheme.labelSmall?.copyWith(
-                fontWeight: FontWeight.w300,
+            Opacity(
+              opacity: 0.7,
+              child: Text(
+                StringUtils.getWeekDay(date),
+                style: textTheme.labelSmall?.copyWith(
+                  fontWeight: FontWeight.w300,
+                ),
               ),
             ),
 
