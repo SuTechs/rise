@@ -29,12 +29,15 @@ class HabitListViewCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            cardColor.withAlpha(80),
-            // cardColor.withOpacity(0.4),
-            cardColor.withAlpha(16),
+            cardColor.withAlpha(55),
+            cardColor.withAlpha(25),
+            cardColor.withAlpha(8),
+            cardColor.withAlpha(0),
           ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(16.0),
       ),
       child: Column(
         children: [
@@ -49,7 +52,13 @@ class HabitListViewCard extends StatelessWidget {
             ),
 
             /// Habit Title
-            title: Text(data.name),
+            title: Text(
+              data.name,
+              style: context.textTheme.titleLarge?.copyWith(
+                fontFamily: "Merriweather",
+                fontSize: 20.0
+              ),
+            ),
 
             /// Habit more options
             trailing: CircleAvatar(
@@ -117,10 +126,13 @@ class DateTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             /// Day of the week
-            Text(
-              StringUtils.getWeekDay(date),
-              style: textTheme.labelSmall?.copyWith(
-                fontWeight: FontWeight.w300,
+            Opacity(
+              opacity: 0.7,
+              child: Text(
+                StringUtils.getWeekDay(date),
+                style: textTheme.labelSmall?.copyWith(
+                  fontWeight: FontWeight.w300,
+                ),
               ),
             ),
 
